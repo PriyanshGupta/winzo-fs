@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WinZO - Simple Mobile Mockup</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .mobile-container {
+            width: 375px;
+            height: 700px;
+            /* background: url("Background.jpg") center center; */
+            background-size: cover;
+            border-radius: 25px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border: 8px solid #333;
+        }
+
+        /* Status Bar */
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            color: white;
+            font-size: 12px;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .status-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .status-right {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .profile-pic {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .diamond-icon {
+            color: #ffd700;
+            font-size: 16px;
+        }
+
+        .wallet-btn {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border: none;
+            border-radius: 20px;
+            padding: 8px 15px;
+            color: white;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .notification {
+            position: relative;
+            color: white;
+            font-size: 18px;
+        }
+
+        .notification::after {
+            content: "9+";
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #ff4757;
+            color: white;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .wheel-icon {
+            color: #ffd700;
+            font-size: 18px;
+            animation: spin 3s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Main Navigation */
+        .main-nav {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            padding: 15px 0;
+            color: white;
+            font-weight: bold;
+        }
+
+        .nav-tab {
+            padding: 10px 0;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .nav-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #ffd700;
+            border-radius: 2px;
+        }
+
+        /* Content Area */
+        .content {
+            padding: 20px;
+            color: white;
+            text-align: center;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: calc(100% - 75px);
+            background: linear-gradient(180deg, #2d1b69 0%, #1a1a2e 100%);
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 15px 10px;
+            background: linear-gradient(180deg, #2d1b69 0%, #1a1a2e 100%);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            color: white;
+            font-size: 10px;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 10px;
+            transition: background-color 0.3s ease;
+            /* background: rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.3); */
+            flex: 1;
+            max-width: 70px;
+        }
+
+        /* .nav-item:hover {
+            background: rgba(255, 215, 0, 0.2);
+            border: 1px solid rgba(255, 215, 0, 0.5);
+        } */
+
+        .nav-icon {
+            font-size: 20px;
+            /* color: #ffd700; */
+        }
+
+        /* .play-button {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        } */
+    </style>
+</head>
+<body>
+    <div class="mobile-container">
+        <!-- Status Bar -->
+        <!-- <div class="status-bar">
+            <div class="status-left">
+                <span>6:12</span>
+                <div class="profile-pic">👤</div>
+                <div class="diamond-icon">💎</div>
+                <span>0</span>
+            </div>
+            <button class="wallet-btn">💰 ₹20</button>
+            <div class="status-right">
+                <div class="notification">🔔</div>
+                <div class="wheel-icon">🎡</div>
+                <span>📶</span>
+                <span>📶</span>
+                <span>🔋 65%</span>
+            </div>
+        </div> -->
+
+        <!-- Main Navigation -->
+        <!-- <div class="main-nav">
+            <div class="nav-tab active">WINZOMANIA</div>
+            <div class="nav-tab">WORLD WAR</div>
+            <div class="nav-tab">TOURNAMENT</div>
+        </div> -->
+
+        <!-- Content Area -->
+        <div class="content">
+            <!-- <div>WinZO Game Content Area</div> -->
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <div class="nav-item">
+                <div class="nav-icon">🪜</div>
+                <span>SLadder</span>
+            </div>
+            <div class="nav-item">
+                <div class="nav-icon">⚔️</div>
+                <span>War</span>
+            </div>
+            <div class="nav-item" style="background: rgba(255, 215, 0, 0.2); border: 1px solid rgba(255, 215, 0, 0.5);">
+                <div class="nav-icon">▶️</div>
+                <span>Play Now</span>
+            </div>
+                         <div class="nav-item" onclick="window.location.href='clan_info.html'" style="cursor: pointer;">
+                 <div class="nav-icon">👥</div>
+                 <span>Clan</span>
+             </div>
+            <div class="nav-item">
+                <div class="nav-icon">💼</div>
+                <span>Wallet</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
