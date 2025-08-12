@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WinZO - Simple Mobile Mockup</title>
+    <title>WinZO - Clan Info</title>
     <style>
         * {
             margin: 0;
@@ -24,8 +24,7 @@
         .mobile-container {
             width: 375px;
             height: 700px;
-            /* background: url("Background.jpg") center center; */
-            background-size: cover;
+            background: linear-gradient(180deg, #2d1b69 0%, #1a1a2e 100%);
             border-radius: 25px;
             overflow: hidden;
             position: relative;
@@ -33,130 +32,269 @@
             border: 8px solid #333;
         }
 
-        /* Status Bar */
-        .status-bar {
+        /* Scrollable Content Container */
+        .scrollable-content {
+            height: calc(100% - 80px); /* Account for bottom nav */
+            overflow-y: auto;
+            padding-bottom: 80px;
+            /* Hide scrollbar for webkit browsers */
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* Internet Explorer 10+ */
+        }
+        
+        /* Hide scrollbar for webkit browsers */
+        .scrollable-content::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Header */
+        /* .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 20px;
-            color: white;
-            font-size: 12px;
+            padding: 12px 20px;
             background: rgba(0, 0, 0, 0.2);
         }
 
-        .status-left {
+        .back-btn {
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+        } */
+
+        .header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 12px 20px;
+            background: rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .back-btn {
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            position: absolute;
+            left: 20px;
+        }
+
+        .header-title {
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #8b5cf6, #a855f7);
+            padding: 6px 14px;
+            border-radius: 18px;
+        }
+
+        .chat-btn {
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+            transition: transform 0.2s ease;
+            position: absolute;
+            right: 20px;
+        }
+
+        .chat-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* Clan Info Section */
+        .clan-info {
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .clan-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #22c55e, #16a34a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            border: 2px solid #ffd700;
+        }
+
+        .clan-details {
+            flex: 1;
+        }
+
+        .clan-name {
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 3px;
+        }
+
+        .clan-id {
+            color: #cbd5e1;
+            font-size: 12px;
+            margin-bottom: 3px;
+        }
+
+        .member-count {
+            color: #cbd5e1;
+            font-size: 12px;
+        }
+
+        /* XP Progress */
+        .xp-section {
+            padding: 0 20px 15px;
+        }
+
+        .xp-label {
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .xp-progress {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            height: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .xp-fill {
+            background: linear-gradient(90deg, #8b5cf6, #a855f7);
+            height: 100%;
+            width: 18%;
+            border-radius: 8px;
+            transition: width 0.3s ease;
+        }
+
+        .xp-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            padding: 0 20px 15px;
+            display: flex;
+            gap: 12px;
+        }
+
+        .action-btn {
+            flex: 1;
+            background: linear-gradient(45deg, #8b5cf6, #a855f7);
+            border: none;
+            border-radius: 12px;
+            padding: 10px;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Tip Box */
+        .tip-box {
+            background: linear-gradient(45deg, #22c55e, #16a34a);
+            margin: 0 20px 15px;
+            padding: 12px;
+            border-radius: 12px;
+            text-align: center;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
+        }
+
+        /* Members Section */
+        .members-section {
+            padding: 0 20px;
+        }
+
+        .members-title {
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .member-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .member-item {
+            background: rgba(139, 92, 246, 0.2);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 12px;
+            padding: 10px;
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        .status-right {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .profile-pic {
-            width: 30px;
-            height: 30px;
+        .member-avatar {
+            width: 35px;
+            height: 35px;
             border-radius: 50%;
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            background: linear-gradient(45deg, #f59e0b, #d97706);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 16px;
+            flex-shrink: 0;
         }
 
-        .diamond-icon {
-            color: #ffd700;
-            font-size: 16px;
+        .member-info {
+            flex: 1;
         }
 
-        .wallet-btn {
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-            border: none;
-            border-radius: 20px;
-            padding: 8px 15px;
+        .member-name {
             color: white;
-            font-size: 12px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .notification {
-            position: relative;
-            color: white;
-            font-size: 18px;
-        }
-
-        .notification::after {
-            content: "9+";
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            background: #ff4757;
-            color: white;
-            border-radius: 50%;
-            width: 16px;
-            height: 16px;
-            font-size: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .wheel-icon {
-            color: #ffd700;
-            font-size: 18px;
-            animation: spin 3s linear infinite;
-        }
-
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        /* Main Navigation */
-        .main-nav {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            padding: 15px 0;
-            color: white;
+            font-size: 14px;
             font-weight: bold;
+            margin-bottom: 2px;
         }
 
-        .nav-tab {
-            padding: 10px 0;
-            cursor: pointer;
-            position: relative;
+        .member-role {
+            color: #cbd5e1;
+            font-size: 11px;
         }
 
-        .nav-tab.active::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: #ffd700;
-            border-radius: 2px;
+        .member-status {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
         }
 
-        /* Content Area */
-        .content {
-            padding: 20px;
-            color: white;
-            text-align: center;
-            font-size: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: calc(100% - 75px);
-            background: linear-gradient(180deg, #2d1b69 0%, #1a1a2e 100%);
-            background-size: cover;
-            background-repeat: no-repeat;
+        .status-online {
+            background: #22c55e;
+        }
+
+        .status-offline {
+            background: #ef4444;
         }
 
         /* Bottom Navigation */
@@ -184,66 +322,302 @@
             padding: 8px 12px;
             border-radius: 10px;
             transition: background-color 0.3s ease;
-            /* background: rgba(255, 215, 0, 0.1);
-            border: 1px solid rgba(255, 215, 0, 0.3); */
             flex: 1;
             max-width: 70px;
         }
 
-        /* .nav-item:hover {
-            background: rgba(255, 215, 0, 0.2);
-            border: 1px solid rgba(255, 215, 0, 0.5);
-        } */
-
         .nav-icon {
             font-size: 20px;
-            /* color: #ffd700; */
         }
 
-        /* .play-button {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+        .nav-item.active {
+            background: rgba(255, 215, 0, 0.2);
+            border: 1px solid rgba(255, 215, 0, 0.5);
+        }
+
+        /* Member Item Clickable */
+        .member-item {
+            cursor: pointer;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+
+        .member-item:hover {
+            transform: translateY(-2px);
+            background: rgba(139, 92, 246, 0.3);
+        }
+
+        /* Popup Modal */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .popup-modal {
+            background: linear-gradient(135deg, #2d1b69, #1a1a2e);
+            border-radius: 20px;
+            padding: 25px;
+            width: 320px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            border: 2px solid #8b5cf6;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.1);
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
+            transition: background-color 0.2s ease;
+        }
+
+        .popup-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .popup-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-right: 40px;
+        }
+
+        .popup-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #f59e0b, #d97706);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 24px;
-            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
-        } */
+            border: 3px solid #ffd700;
+        }
+
+        .popup-member-info h3 {
+            color: white;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .popup-member-info p {
+            color: #cbd5e1;
+            font-size: 14px;
+            margin-bottom: 3px;
+        }
+
+        .popup-stats {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .popup-stats h4 {
+            color: #ffd700;
+            font-size: 16px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .stat-label {
+            color: #cbd5e1;
+            font-size: 14px;
+        }
+
+        .stat-value {
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .popup-achievements {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 15px;
+        }
+
+        .popup-achievements h4 {
+            color: #ffd700;
+            font-size: 16px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .achievement-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+            padding: 8px;
+            background: rgba(34, 197, 94, 0.1);
+            border-radius: 8px;
+            border-left: 3px solid #22c55e;
+        }
+
+        .achievement-icon {
+            color: #22c55e;
+            font-size: 16px;
+        }
+
+        .achievement-text {
+            color: white;
+            font-size: 12px;
+        }
     </style>
 </head>
 <body>
     <div class="mobile-container">
-        <!-- Status Bar -->
-        <!-- <div class="status-bar">
-            <div class="status-left">
-                <span>6:12</span>
-                <div class="profile-pic">👤</div>
-                <div class="diamond-icon">💎</div>
-                <span>0</span>
-            </div>
-            <button class="wallet-btn">💰 ₹20</button>
-            <div class="status-right">
-                <div class="notification">🔔</div>
-                <div class="wheel-icon">🎡</div>
-                <span>📶</span>
-                <span>📶</span>
-                <span>🔋 65%</span>
-            </div>
-        </div> -->
+        <!-- Header -->
+        <div class="header">
+            <div class="back-btn" onclick="window.location.href='winzo_mockup.html'" style="cursor: pointer;">←</div>
+            <div class="header-title">YOUR CLAN</div>
+            <div class="chat-btn" onclick="window.location.href='clan_chat.html'">💬</div>
+        </div>
 
-        <!-- Main Navigation -->
-        <!-- <div class="main-nav">
-            <div class="nav-tab active">WINZOMANIA</div>
-            <div class="nav-tab">WORLD WAR</div>
-            <div class="nav-tab">TOURNAMENT</div>
-        </div> -->
+        <!-- Scrollable Content -->
+        <div class="scrollable-content">
+            <!-- Clan Info -->
+            <div class="clan-info">
+                <div class="clan-avatar">👹</div>
+                <div class="clan-details">
+                    <div class="clan-name">Bangalore Machas</div>
+                    <div class="clan-id">ID: 148986</div>
+                    <div class="member-count">24/50 Members</div>
+                </div>
+            </div>
 
-        <!-- Content Area -->
-        <div class="content">
-            <!-- <div>WinZO Game Content Area</div> -->
+                         <!-- XP Progress -->
+             <div class="xp-section">
+                 <div class="xp-label">CLAN XP</div>
+                 <div class="xp-progress">
+                     <div class="xp-fill"></div>
+                     <div class="xp-text">18,000/100,000</div>
+                 </div>
+             </div>
+
+             <!-- Action Buttons -->
+             <div class="action-buttons">
+                 <button class="action-btn" onclick="window.location.href='clan_missions.html'">Missions</button>
+                 <button class="action-btn" onclick="window.location.href='clan_leaderboard.html'">Leaderboard</button>
+                 <button class="action-btn" onclick="window.location.href='clan_wars.html'">Clan Wars</button>
+             </div>
+
+             <!-- Tip Box -->
+             <div class="tip-box">
+                 Play challenges and clan wars, earn XP and work together as a clan to reach the Leaderboard!
+             </div>
+
+            <!-- Members Section -->
+            <div class="members-section">
+                <div class="members-title">MEMBERS</div>
+                <div class="member-list">
+                                         <div class="member-item" onclick="showMemberPopup('GodBreak', '👨‍🦱', 'Clan President', 'online')">
+                         <div class="member-avatar">👨‍🦱</div>
+                         <div class="member-info">
+                             <div class="member-name">GodBreak</div>
+                             <div class="member-role">Clan President</div>
+                         </div>
+                         <div class="member-status status-online"></div>
+                     </div>
+                    
+                                         <div class="member-item" onclick="showMemberPopup('ArcherMaster', '👩‍🦰', 'Mantri', 'online')">
+                         <div class="member-avatar">👩‍🦰</div>
+                         <div class="member-info">
+                             <div class="member-name">ArcherMaster</div>
+                             <div class="member-role">Mantri</div>
+                         </div>
+                         <div class="member-status status-online"></div>
+                     </div>
+                     
+                     <div class="member-item" onclick="showMemberPopup('LudoPro', '👩‍🦱', 'Mantri', 'online')">
+                         <div class="member-avatar">👩‍🦱</div>
+                         <div class="member-info">
+                             <div class="member-name">LudoPro</div>
+                             <div class="member-role">Mantri</div>
+                         </div>
+                         <div class="member-status status-online"></div>
+                     </div>
+                     
+                     <div class="member-item" onclick="showMemberPopup('GopiBhaiya', '👨‍🦳', 'Vidhayak', 'offline')">
+                         <div class="member-avatar">👨‍🦳</div>
+                         <div class="member-info">
+                             <div class="member-name">GopiBhaiya</div>
+                             <div class="member-role">Vidhayak</div>
+                         </div>
+                         <div class="member-status status-offline"></div>
+                     </div>
+                     
+                     <div class="member-item" onclick="showMemberPopup('ShipChips', '👩‍🦳', 'Naagrik', 'offline')">
+                         <div class="member-avatar">👩‍🦳</div>
+                         <div class="member-info">
+                             <div class="member-name">ShipChips</div>
+                             <div class="member-role">Naagrik</div>
+                         </div>
+                         <div class="member-status status-offline"></div>
+                     </div>
+                     
+                     <div class="member-item" onclick="showMemberPopup('LudoKing', '👨‍🦲', 'Naagrik', 'online')">
+                         <div class="member-avatar">👨‍🦲</div>
+                         <div class="member-info">
+                             <div class="member-name">LudoKing</div>
+                             <div class="member-role">Naagrik</div>
+                         </div>
+                         <div class="member-status status-online"></div>
+                     </div>
+                     
+                     <div class="member-item" onclick="showMemberPopup('PokerQueen', '👩‍🦲', 'Naagrik', 'online')">
+                         <div class="member-avatar">👩‍🦲</div>
+                         <div class="member-info">
+                             <div class="member-name">PokerQueen</div>
+                             <div class="member-role">Naagrik</div>
+                         </div>
+                         <div class="member-status status-online"></div>
+                     </div>
+                     
+                     <div class="member-item" onclick="showMemberPopup('RummyPro', '👨‍🦱', 'Naagrik', 'offline')">
+                         <div class="member-avatar">👨‍🦱</div>
+                         <div class="member-info">
+                             <div class="member-name">RummyPro</div>
+                             <div class="member-role">Naagrik</div>
+                         </div>
+                         <div class="member-status status-offline"></div>
+                     </div>
+                 </div>
+             </div>
         </div>
 
         <!-- Bottom Navigation -->
@@ -256,19 +630,187 @@
                 <div class="nav-icon">⚔️</div>
                 <span>War</span>
             </div>
-            <div class="nav-item" style="background: rgba(255, 215, 0, 0.2); border: 1px solid rgba(255, 215, 0, 0.5);">
+            <div class="nav-item" onclick="window.location.href='winzo_mockup.html'" style="cursor: pointer;">
                 <div class="nav-icon">▶️</div>
                 <span>Play Now</span>
             </div>
-                         <div class="nav-item" onclick="window.location.href='clan_info.html'" style="cursor: pointer;">
-                 <div class="nav-icon">👥</div>
-                 <span>Clan</span>
-             </div>
+            <div class="nav-item active">
+                <div class="nav-icon">👥</div>
+                <span>Clans</span>
+            </div>
             <div class="nav-item">
                 <div class="nav-icon">💼</div>
                 <span>Wallet</span>
             </div>
         </div>
     </div>
+
+    <!-- Member Popup Modal -->
+    <div class="popup-overlay" id="memberPopup">
+        <div class="popup-modal">
+            <div class="popup-close" onclick="closeMemberPopup()">×</div>
+            <div class="popup-header">
+                <div class="popup-avatar" id="popupAvatar">👨‍🦱</div>
+                <div class="popup-member-info">
+                    <h3 id="popupName">GodBreak</h3>
+                    <p id="popupRole">Clan President</p>
+                    <p id="popupStatus">🟢 Online</p>
+                </div>
+            </div>
+            
+            <div class="popup-stats">
+                <h4>📊 Player Stats</h4>
+                <div class="stat-item">
+                    <span class="stat-label">Hours Played</span>
+                    <span class="stat-value" id="popupHours">247</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Most Played Game</span>
+                    <span class="stat-value" id="popupGame">Ludo</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Win Rate</span>
+                    <span class="stat-value" id="popupWinRate">68%</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Total Wins</span>
+                    <span class="stat-value" id="popupWins">1,247</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Clan Contribution</span>
+                    <span class="stat-value" id="popupContribution">2,450 XP</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Join Date</span>
+                    <span class="stat-value" id="popupJoinDate">March 2024</span>
+                </div>
+            </div>
+            
+            <div class="popup-achievements">
+                <h4>🏆 Recent Achievements</h4>
+                <div class="achievement-item">
+                    <span class="achievement-icon">🥇</span>
+                    <span class="achievement-text">Clan MVP - Top contributor this month</span>
+                </div>
+                <div class="achievement-item">
+                    <span class="achievement-icon">🔥</span>
+                    <span class="achievement-text">Win Streak - 15 consecutive wins</span>
+                </div>
+                <div class="achievement-item">
+                    <span class="achievement-icon">⚡</span>
+                    <span class="achievement-text">Speed Demon - Fastest game completion</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Member data for popup
+        const memberData = {
+            'GodBreak': {
+                hours: 247,
+                game: 'Ludo',
+                winRate: '68%',
+                wins: '1,247',
+                contribution: '2,450 XP',
+                joinDate: 'March 2024',
+                achievements: ['Clan MVP - Top contributor this month', 'Win Streak - 15 consecutive wins', 'Speed Demon - Fastest game completion']
+            },
+            'ArcherMaster': {
+                hours: 189,
+                game: 'Poker',
+                winRate: '72%',
+                wins: '892',
+                contribution: '1,890 XP',
+                joinDate: 'January 2024',
+                achievements: ['Poker Master - Highest poker earnings', 'Team Player - Most assists', 'Lucky Streak - 10 wins in a row']
+            },
+            'LudoPro': {
+                hours: 156,
+                game: 'Ludo',
+                winRate: '65%',
+                wins: '734',
+                contribution: '1,567 XP',
+                joinDate: 'February 2024',
+                achievements: ['Ludo Champion - Tournament winner', 'Quick Thinker - Fastest moves', 'Supportive - Helped 50+ clan members']
+            },
+            'GopiBhaiya': {
+                hours: 98,
+                game: 'Rummy',
+                winRate: '58%',
+                wins: '456',
+                contribution: '987 XP',
+                joinDate: 'April 2024',
+                achievements: ['Rummy Expert - 100+ rummy wins', 'Patient Player - Longest game duration', 'Friendly - Most helpful member']
+            },
+            'ShipChips': {
+                hours: 134,
+                game: 'Carrom',
+                winRate: '61%',
+                wins: '623',
+                contribution: '1,234 XP',
+                joinDate: 'December 2023',
+                achievements: ['Carrom King - Undefeated in carrom', 'Precision Master - Perfect shots', 'Veteran - 6+ months in clan']
+            },
+            'LudoKing': {
+                hours: 203,
+                game: 'Ludo',
+                winRate: '70%',
+                wins: '1,089',
+                contribution: '2,100 XP',
+                joinDate: 'November 2023',
+                achievements: ['Ludo Legend - 1000+ ludo wins', 'Tournament Champion - 3 tournament wins', 'Mentor - Trained 20+ new members']
+            },
+            'PokerQueen': {
+                hours: 178,
+                game: 'Poker',
+                winRate: '75%',
+                wins: '945',
+                contribution: '1,789 XP',
+                joinDate: 'October 2023',
+                achievements: ['Poker Queen - Highest poker win rate', 'Bluff Master - Best poker strategy', 'Elite Player - Top 1% performer']
+            },
+            'RummyPro': {
+                hours: 145,
+                game: 'Rummy',
+                winRate: '63%',
+                wins: '678',
+                contribution: '1,345 XP',
+                joinDate: 'September 2023',
+                achievements: ['Rummy Master - 500+ rummy wins', 'Card Counter - Perfect memory', 'Strategic - Best game planning']
+            }
+        };
+
+        function showMemberPopup(name, avatar, role, status) {
+            const popup = document.getElementById('memberPopup');
+            const data = memberData[name] || memberData['GodBreak']; // fallback to GodBreak data
+            
+            // Update popup content
+            document.getElementById('popupAvatar').textContent = avatar;
+            document.getElementById('popupName').textContent = name;
+            document.getElementById('popupRole').textContent = role;
+            document.getElementById('popupStatus').textContent = status === 'online' ? '🟢 Online' : '🔴 Offline';
+            document.getElementById('popupHours').textContent = data.hours;
+            document.getElementById('popupGame').textContent = data.game;
+            document.getElementById('popupWinRate').textContent = data.winRate;
+            document.getElementById('popupWins').textContent = data.wins;
+            document.getElementById('popupContribution').textContent = data.contribution;
+            document.getElementById('popupJoinDate').textContent = data.joinDate;
+            
+            // Show popup
+            popup.style.display = 'flex';
+        }
+
+        function closeMemberPopup() {
+            document.getElementById('memberPopup').style.display = 'none';
+        }
+
+        // Close popup when clicking outside
+        document.getElementById('memberPopup').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeMemberPopup();
+            }
+        });
+    </script>
 </body>
 </html>
